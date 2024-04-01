@@ -1,4 +1,4 @@
-import ships from '../logic/ships';
+import ships from '../src/logic/ships';
 
 describe('test ship class functionality', () => {
   test('should exist', () => {
