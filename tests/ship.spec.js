@@ -20,4 +20,10 @@ describe('test ship class functionality', () => {
     // eslint-disable-next-line jest/prefer-to-have-length
     expect(newShip.length).toBe(2);
   });
+  test('ships should have hit amount property', () => {
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    newShip.hit();
+    expect(newShip.hits).toBe(1);
+  });
 });
