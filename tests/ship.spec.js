@@ -20,10 +20,23 @@ describe('test ship class functionality', () => {
     // eslint-disable-next-line jest/prefer-to-have-length
     expect(newShip.length).toBe(2);
   });
-  test('ships should have hit amount property', () => {
+  test('should have hit amount property', () => {
     const shipName = 'Destroyer';
     const newShip = new Ship(shipName);
     newShip.hit();
     expect(newShip.hits).toBe(1);
+  });
+  test('should not be sunken with less hits than length', () => {
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    newShip.hit();
+    expect(newShip.sunk).toBeFalsy();
+  });
+  test('should be sunken when hits equal length', () => {
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    newShip.hit();
+    newShip.hit();
+    expect(newShip.sunk).toBeTruthy();
   });
 });

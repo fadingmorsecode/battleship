@@ -3,6 +3,7 @@ export default class Ship {
     this.name = name;
     this.length = this.getLength();
     this.hits = 0;
+    this.sunk = false;
   }
 
   getLength() {
@@ -22,7 +23,14 @@ export default class Ship {
     }
   }
 
+  isSunk() {
+    if (this.hits === this.length) {
+      this.sunk = true;
+    }
+  }
+
   hit() {
     this.hits += 1;
+    this.isSunk();
   }
 }
