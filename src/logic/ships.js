@@ -36,6 +36,6 @@ export default class Ship {
   }
 
   updateCoordinates(newCoords) {
-    this.coordinates.push(newCoords[0], newCoords[1]);
+    this.coordinates.push(...newCoords);
   }
 }

@@ -124,9 +124,19 @@ describe('test gameboard class', () => {
     const boardName = 'Player';
     const expected = new Gameboard(boardName);
     expected.placeShip(newShip, placement);
-    const expectedShip = expected.placedShips.find(
-      (ship) => ship.name === 'Destroyer',
-    );
-    expect(expectedShip.coordinates).toEqual(placement);
+    expect(newShip.coordinates).toEqual(placement);
+  });
+  test('should prevent ships from overlapping', () => {
+    const boardName = 'Player';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    const placement = ['J2', 'J3'];
+    newBoard.placeShip(newShip, placement);
+    const shipName2 = 'Cruiser';
+    const newShip2 = new Ship(shipName2);
+    const placement2 = ['H3', 'I3', 'J3'];
+    newBoard.placeShip(newShip2, placement2);
+    expect(newShip2.coordinates).toHaveLength(0);
   });
 });
