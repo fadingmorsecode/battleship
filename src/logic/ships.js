@@ -4,6 +4,7 @@ export default class Ship {
     this.length = this.getLength();
     this.hits = 0;
     this.sunk = false;
+    this.coordinates = [];
   }
 
   getLength() {
@@ -32,5 +33,9 @@ export default class Ship {
   hit() {
     this.hits += 1;
     this.isSunk();
+  }
+
+  updateCoordinates(newCoords) {
+    this.coordinates.push(newCoords[0], newCoords[1]);
   }
 }

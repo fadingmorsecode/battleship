@@ -1,4 +1,5 @@
 import Gameboard from '../src/logic/gameBoard';
+import Ship from '../src/logic/ships';
 
 describe('test gameboard class', () => {
   test('module should exist', () => {
@@ -115,5 +116,17 @@ describe('test gameboard class', () => {
       'J10',
     ];
     expect(expected.boardArr).toEqual(Arr);
+  });
+  test('should be able to place a ship at specific coordinates', () => {
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    const placement = ['J2', 'J3'];
+    const boardName = 'Player';
+    const expected = new Gameboard(boardName);
+    expected.placeShip(newShip, placement);
+    const expectedShip = expected.placedShips.find(
+      (ship) => ship.name === 'Destroyer',
+    );
+    expect(expectedShip.coordinates).toEqual(placement);
   });
 });
