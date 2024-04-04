@@ -14,12 +14,6 @@ export default class Gameboard {
     })();
   }
 
-  // redo this function. it should be able to check each array.
-  // basically check if the coordinates fall in between any pair and consider
-  // the fact that we have cells that are in between the pair of coordinates that are occupied.
-  // so we should look to see if
-  // also each ship coordinates pair should be an array to properly check this.
-
   getAllCells(coords, length) {
     const allCells = [];
     const start = coords[0];
