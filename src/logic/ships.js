@@ -1,27 +1,32 @@
 export default class Ship {
   constructor(name) {
     this.name = name;
-    this.length = this.getLength();
+    this.length = null;
     this.hits = 0;
     this.sunk = false;
     this.coordinates = [];
-  }
 
-  getLength() {
-    switch (this.name) {
-      case 'Destroyer':
-        return 2;
-      case 'Submarine':
-        return 3;
-      case 'Cruiser':
-        return 3;
-      case 'Battleship':
-        return 4;
-      case 'Carrier':
-        return 5;
-      default:
-        throw Error('no valid name or length present');
-    }
+    (() => {
+      switch (this.name) {
+        case 'Destroyer':
+          this.length = 2;
+          break;
+        case 'Submarine':
+          this.length = 3;
+          break;
+        case 'Cruiser':
+          this.length = 3;
+          break;
+        case 'Battleship':
+          this.length = 4;
+          break;
+        case 'Carrier':
+          this.length = 5;
+          break;
+        default:
+          throw Error('no valid name or length present');
+      }
+    })();
   }
 
   isSunk() {

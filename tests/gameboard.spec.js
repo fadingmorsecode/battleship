@@ -139,4 +139,14 @@ describe('test gameboard class', () => {
     newBoard.placeShip(newShip2, placement2);
     expect(newShip2.coordinates).toHaveLength(0);
   });
+  // eslint-disable-next-line jest/no-disabled-tests
+  test.skip('should prevent diagonal placement', () => {
+    const boardName = 'Player';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    const placement = ['D6', 'E5', 'F4'];
+    newBoard.placeShip(newShip, placement);
+    expect(newShip.coordinates).toHaveLength(0);
+  });
 });
