@@ -136,16 +136,29 @@ describe('test gameboard class', () => {
     newBoard.placeShip(newShip, placement);
     expect(newShip.coordinates).toHaveLength(0);
   });
-  test.skip('should prevent ships from overlapping', () => {
+  test('should prevent ships from overlapping', () => {
     const boardName = 'Player';
     const newBoard = new Gameboard(boardName);
-    const shipName = 'Destroyer';
+    const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
     const placement = ['D3', 'F3'];
     newBoard.placeShip(newShip, placement);
     const shipName2 = 'Carrier';
     const newShip2 = new Ship(shipName2);
     const placement2 = ['E2', 'E6'];
+    newBoard.placeShip(newShip2, placement2);
+    expect(newShip2.coordinates).toHaveLength(0);
+  });
+  test('should prevent ships from overlapping when second ship is vertical', () => {
+    const boardName = 'Player';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    const shipName2 = 'Carrier';
+    const newShip2 = new Ship(shipName2);
+    const placement2 = ['C9', 'G9'];
     newBoard.placeShip(newShip2, placement2);
     expect(newShip2.coordinates).toHaveLength(0);
   });

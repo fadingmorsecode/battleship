@@ -19,37 +19,27 @@ export default class Gameboard {
   // the fact that we have cells that are in between the pair of coordinates that are occupied.
   // so we should look to see if
   // also each ship coordinates pair should be an array to properly check this.
-  isOccupied(desiredCoords) {
-    const allCoords = [];
-    this.placedShips.forEach((ship) => {
-      const shipCoords = ship.coordinates;
-
-      // allCoords.push(...ship.coordinates);
-    });
-    return desiredCoords.some((item) => allCoords.includes(item));
-  }
-
-  interveningNums(num1, num2) {
-    return Math.abs(num1 - num2) - 1;
-  }
 
   getAllCells(coords, length) {
     const allCells = [];
     const start = coords[0];
     const end = coords[1];
     const startX = start.charAt(0);
-    const startY = start.charAt(1);
+    const startY = parseInt(start.substring(1), 10);
     const endX = end.charAt(0);
-    const endY = end.charAt(1);
+    const endY = parseInt(end.substring(1), 10);
     const baseCoordAmount = 2;
     if (startX === endX && startY !== endY) {
       // horizontal condition
       const distance = this.interveningNums(endY, startY);
       const combined = baseCoordAmount + distance;
+      console.log('hi');
+      console.log(combined);
       if (combined === length) {
         // start coords
         allCells.push(start);
         // intervening coords
+        console.log(startY);
         let y = startY;
         for (let i = 0; i < distance; i += 1) {
           y += 1;
@@ -69,10 +59,9 @@ export default class Gameboard {
         // start coords
         allCells.push(start);
         // intervening coords
-        let x = startX;
+        let interveningIndex = letters.indexOf(startX);
         for (let i = 0; i < distance; i += 1) {
-          x += 1;
-          const interveningIndex = letters.indexOf(x);
+          interveningIndex += 1;
           allCells.push(`${letters[interveningIndex]}${startY}`);
         }
         // end coords
@@ -83,8 +72,32 @@ export default class Gameboard {
     return false;
   }
 
+  isOccupied(desiredCoords, desiredLength) {
+    const everyShipCell = [];
+    // get every cell of each ship and pushes to
+    this.placedShips.forEach((ship) => {
+      const shipCoords = ship.coordinates;
+      const allCells = this.getAllCells(shipCoords, ship.length);
+      everyShipCell.push(allCells);
+    });
+    // return false if no ships are placed
+    console.log(everyShipCell);
+    if (everyShipCell.length === 0) {
+      return false;
+    }
+    // get all cells of desired ship's coordinates
+    const allDesired = this.getAllCells(desiredCoords, desiredLength);
+    // flattens everyShipCell array and checks if desired coords exist
+    return allDesired.some((item) => everyShipCell.flat().includes(item));
+  }
+
+  interveningNums(num1, num2) {
+    return Math.abs(num1 - num2) - 1;
+  }
+
   isLegal(coords, length) {
     const result = this.getAllCells(coords, length);
+    console.log(result);
     if (result !== false) {
       return true;
     }
@@ -93,8 +106,9 @@ export default class Gameboard {
 
   placeShip(ship, loc) {
     // check if occupied and if placement is legal
+    console.log(ship);
     if (
-      this.isOccupied(loc) === false &&
+      this.isOccupied(loc, ship.length) === false &&
       this.isLegal(loc, ship.length) !== false
     ) {
       // ship coordinates are updated on ship object
