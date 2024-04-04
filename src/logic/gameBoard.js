@@ -1,10 +1,11 @@
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
 export default class Gameboard {
   constructor(name) {
     this.name = name;
     this.boardArr = [];
     this.placedShips = [];
     (() => {
-      const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
       for (let i = 0; i < 10; i += 1) {
         for (let j = 1; j <= 10; j += 1) {
           this.boardArr.push(`${letters[i]}${j}`);
@@ -21,26 +22,48 @@ export default class Gameboard {
     return desiredCoords.some((item) => allCoords.includes(item));
   }
 
-  isDiagonal(loc) {
-    // const xPos = [];
-    // const yPos = [];
-    // // loc.forEach((coord) => {
-    // //   xPos.push(coord.charAt(0));
-    // //   yPos.push(coord.charAt(1));
-    // // });
-    // // const xResult = xPos.every((x) => x === xPos[0]);
-    // // const yResult = yPos.every((y) => y === yPos[0]);
-    // // if (xResult === false || yResult === false) {
-    // //   return true;
-    // // }
-    // // return false;
+  interveningNums(num1, num2) {
+    return Math.abs(num1 - num2) - 1;
   }
 
-  //   && this.isDiagonal(loc) === false
+  isLegal(coords, length) {
+    const start = coords[0];
+    const end = coords[1];
+    const startX = start.charAt(0);
+    const startY = start.charAt(1);
+    const endX = end.charAt(0);
+    const endY = end.charAt(1);
+
+    const baseCoordAmount = 2;
+
+    if (startX === endX && startY !== endY) {
+      // horizontal condition
+      const distance = this.interveningNums(endY, startY);
+      if (baseCoordAmount + distance === length) {
+        return true;
+      }
+    } else if (startX !== endX && startY === endY) {
+      // vertical condition
+      const startIndex = letters.indexOf(startX);
+      const endIndex = letters.indexOf(endX);
+      const distance = this.interveningNums(endIndex, startIndex);
+      if (baseCoordAmount + distance === length) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   placeShip(ship, loc) {
-    if (this.isOccupied(loc) === false) {
+    // check if occupied and if placement is legal
+    console.log(this.isLegal(loc, ship.length));
+    if (
+      this.isOccupied(loc) === false &&
+      this.isLegal(loc, ship.length) !== false
+    ) {
+      // ship coordinates are updated on ship object
       ship.updateCoordinates(loc);
+      // push ship coordinates to placedShips array
       this.placedShips.push(ship);
     }
   }
