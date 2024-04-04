@@ -33,13 +33,10 @@ export default class Gameboard {
       // horizontal condition
       const distance = this.interveningNums(endY, startY);
       const combined = baseCoordAmount + distance;
-      console.log('hi');
-      console.log(combined);
       if (combined === length) {
         // start coords
         allCells.push(start);
         // intervening coords
-        console.log(startY);
         let y = startY;
         for (let i = 0; i < distance; i += 1) {
           y += 1;
@@ -81,7 +78,6 @@ export default class Gameboard {
       everyShipCell.push(allCells);
     });
     // return false if no ships are placed
-    console.log(everyShipCell);
     if (everyShipCell.length === 0) {
       return false;
     }
@@ -97,7 +93,6 @@ export default class Gameboard {
 
   isLegal(coords, length) {
     const result = this.getAllCells(coords, length);
-    console.log(result);
     if (result !== false) {
       return true;
     }
@@ -106,7 +101,6 @@ export default class Gameboard {
 
   placeShip(ship, loc) {
     // check if occupied and if placement is legal
-    console.log(ship);
     if (
       this.isOccupied(loc, ship.length) === false &&
       this.isLegal(loc, ship.length) !== false
@@ -118,6 +112,3 @@ export default class Gameboard {
     }
   }
 }
-
-// REWORK TO MAKE SURE EVERYTHING ONLY ACCEPTS TWO COORDINATES OR AT LEAST THAT OUR TESTS USE TWO COORDINATES!!!!!!
-// GO THRU EACH TEST BEGINNING TO END AND DO THIS BEFORE WE WORK ON OUR OVERLAPPING CHECK!!!
