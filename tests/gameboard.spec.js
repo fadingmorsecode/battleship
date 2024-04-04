@@ -118,26 +118,13 @@ describe('test gameboard class', () => {
     expect(expected.boardArr).toEqual(Arr);
   });
   test('should be able to place a ship at specific coordinates', () => {
-    const shipName = 'Cruiser';
+    const shipName = 'Carrier';
     const newShip = new Ship(shipName);
-    const placement = ['J2', 'J4'];
-    const boardName = 'Player';
+    const placement = ['E2', 'E6'];
+    const boardName = 'Carrier';
     const expected = new Gameboard(boardName);
     expected.placeShip(newShip, placement);
     expect(newShip.coordinates).toEqual(placement);
-  });
-  test.skip('should prevent ships from overlapping', () => {
-    const boardName = 'Player';
-    const newBoard = new Gameboard(boardName);
-    const shipName = 'Destroyer';
-    const newShip = new Ship(shipName);
-    const placement = ['J2', 'J3'];
-    newBoard.placeShip(newShip, placement);
-    const shipName2 = 'Cruiser';
-    const newShip2 = new Ship(shipName2);
-    const placement2 = ['H3', 'I3', 'J3'];
-    newBoard.placeShip(newShip2, placement2);
-    expect(newShip2.coordinates).toHaveLength(0);
   });
   // eslint-disable-next-line jest/no-disabled-tests
   test('should prevent diagonal placement', () => {
@@ -145,8 +132,21 @@ describe('test gameboard class', () => {
     const newBoard = new Gameboard(boardName);
     const shipName = 'Destroyer';
     const newShip = new Ship(shipName);
-    const placement = ['D6', 'E5', 'F4'];
+    const placement = ['H5', 'G6'];
     newBoard.placeShip(newShip, placement);
     expect(newShip.coordinates).toHaveLength(0);
+  });
+  test.skip('should prevent ships from overlapping', () => {
+    const boardName = 'Player';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    const placement = ['D3', 'F3'];
+    newBoard.placeShip(newShip, placement);
+    const shipName2 = 'Carrier';
+    const newShip2 = new Ship(shipName2);
+    const placement2 = ['E2', 'E6'];
+    newBoard.placeShip(newShip2, placement2);
+    expect(newShip2.coordinates).toHaveLength(0);
   });
 });

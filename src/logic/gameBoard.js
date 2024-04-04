@@ -14,10 +14,17 @@ export default class Gameboard {
     })();
   }
 
+  // redo this function. it should be able to check each array.
+  // basically check if the coordinates fall in between any pair and consider
+  // the fact that we have cells that are in between the pair of coordinates that are occupied.
+  // so we should look to see if
+  // also each ship coordinates pair should be an array to properly check this.
   isOccupied(desiredCoords) {
     const allCoords = [];
     this.placedShips.forEach((ship) => {
-      allCoords.push(...ship.coordinates);
+      const shipCoords = ship.coordinates;
+
+      // allCoords.push(...ship.coordinates);
     });
     return desiredCoords.some((item) => allCoords.includes(item));
   }
@@ -26,37 +33,66 @@ export default class Gameboard {
     return Math.abs(num1 - num2) - 1;
   }
 
-  isLegal(coords, length) {
+  getAllCells(coords, length) {
+    const allCells = [];
     const start = coords[0];
     const end = coords[1];
     const startX = start.charAt(0);
     const startY = start.charAt(1);
     const endX = end.charAt(0);
     const endY = end.charAt(1);
-
     const baseCoordAmount = 2;
-
     if (startX === endX && startY !== endY) {
       // horizontal condition
       const distance = this.interveningNums(endY, startY);
-      if (baseCoordAmount + distance === length) {
-        return true;
+      const combined = baseCoordAmount + distance;
+      if (combined === length) {
+        // start coords
+        allCells.push(start);
+        // intervening coords
+        let y = startY;
+        for (let i = 0; i < distance; i += 1) {
+          y += 1;
+          allCells.push(`${startX}${y}`);
+        }
+        // end coords
+        allCells.push(end);
+        return allCells;
       }
     } else if (startX !== endX && startY === endY) {
       // vertical condition
       const startIndex = letters.indexOf(startX);
       const endIndex = letters.indexOf(endX);
       const distance = this.interveningNums(endIndex, startIndex);
-      if (baseCoordAmount + distance === length) {
-        return true;
+      const combined = baseCoordAmount + distance;
+      if (combined === length) {
+        // start coords
+        allCells.push(start);
+        // intervening coords
+        let x = startX;
+        for (let i = 0; i < distance; i += 1) {
+          x += 1;
+          const interveningIndex = letters.indexOf(x);
+          allCells.push(`${letters[interveningIndex]}${startY}`);
+        }
+        // end coords
+        allCells.push(end);
+        return allCells;
       }
+    }
+    return false;
+  }
+
+  isLegal(coords, length) {
+    const result = this.getAllCells(coords, length);
+    if (result !== false) {
+      return true;
     }
     return false;
   }
 
   placeShip(ship, loc) {
     // check if occupied and if placement is legal
-    console.log(this.isLegal(loc, ship.length));
     if (
       this.isOccupied(loc) === false &&
       this.isLegal(loc, ship.length) !== false
@@ -69,10 +105,5 @@ export default class Gameboard {
   }
 }
 
-// TO WORK ON NEXT. OVERHANG & HORIZONTAL + VERTICAL PLACEMENT (LEGALITY)
-// START X POSITION, END X POSITION.
-// START Y POSITION, END Y POSITION.
-// OVERHANG PROBABLY HAS SOMETHING TO DO WITH LENGTH OF SHIP AND WHETHER OR NOT THE COORDS LIKE
-// SHIP HAS 4 SPOTS BUT ONLY 3 COORDINATES PRESENT. SO OVERHANGING.
-
-// ALSO CHECK TO MAKE SURE PLACEMENT CHECKS FOR EXACT LENGTH OF SHIP!!! IF 4, NEEDS 4 COORDS.
+// REWORK TO MAKE SURE EVERYTHING ONLY ACCEPTS TWO COORDINATES OR AT LEAST THAT OUR TESTS USE TWO COORDINATES!!!!!!
+// GO THRU EACH TEST BEGINNING TO END AND DO THIS BEFORE WE WORK ON OUR OVERLAPPING CHECK!!!
