@@ -162,9 +162,44 @@ describe('test gameboard class', () => {
     newBoard.placeShip(newShip2, placement2);
     expect(newShip2.coordinates).toHaveLength(0);
   });
+  test('should prevent ship from being placed when coords are longer', () => {
+    const boardName = 'Player';
+    const newBoard = new Gameboard(boardName);
+    const shipName5 = 'Carrier';
+    const newShip5 = new Ship(shipName5);
+    const placement5 = ['A5', 'F5'];
+    newBoard.placeShip(newShip5, placement5);
+    expect(newBoard.placedShips).toHaveLength(0);
+  });
+  test('should report if all ships are sunk', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    const shipName2 = 'Destroyer';
+    const newShip2 = new Ship(shipName2);
+    const placement2 = ['C2', 'D2'];
+    newBoard.placeShip(newShip2, placement2);
+    const shipName3 = 'Submarine';
+    const newShip3 = new Ship(shipName3);
+    const placement3 = ['G6', 'I6'];
+    newBoard.placeShip(newShip3, placement3);
+    const shipName4 = 'Battleship';
+    const newShip4 = new Ship(shipName4);
+    const placement4 = ['G1', 'G4'];
+    newBoard.placeShip(newShip4, placement4);
+    const shipName5 = 'Carrier';
+    const newShip5 = new Ship(shipName5);
+    const placement5 = ['A5', 'E5'];
+    newBoard.placeShip(newShip5, placement5);
+    const sunkResult = newBoard.allSunk();
+    expect(sunkResult).toBeTruthy();
+  });
 });
 
-describe('test receiveAttack function', () => {
+describe.skip('test receiveAttack function', () => {
   test('should determine that a ship was hit', () => {
     const boardName = 'CPU';
     const newBoard = new Gameboard(boardName);

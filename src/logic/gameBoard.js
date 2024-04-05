@@ -83,6 +83,8 @@ export default class Gameboard {
     }
     // get all cells of desired ship's coordinates
     const allDesired = this.getAllCells(desiredCoords, desiredLength);
+    console.log(allDesired);
+    // console.log(allDesired);
     // flattens everyShipCell array and checks if desired coords exist
     return allDesired.some((item) => everyCellArr.flat().includes(item));
   }
@@ -100,15 +102,13 @@ export default class Gameboard {
   }
 
   placeShip(ship, loc) {
-    // check if occupied and if placement is legal
-    if (
-      this.isOccupied(loc, ship.length) === false &&
-      this.isLegal(loc, ship.length) !== false
-    ) {
-      // ship coordinates are updated on ship object
-      ship.updateCoordinates(loc);
-      // push ship coordinates to placedShips array
-      this.placedShips.push(ship);
+    if (this.isLegal(loc, ship.length) !== false) {
+      // move is legal, check if occupied.
+      if (this.isOccupied(loc, ship.length) === false) {
+        // not occupied, update ships coords and place ship
+        ship.updateCoordinates(loc);
+        this.placedShips.push(ship);
+      }
     }
   }
 
@@ -137,4 +137,8 @@ export default class Gameboard {
     this.missedShots.push(location);
     return false;
   }
+
+  // allSunk() {
+  //   const shipsArr = this.placedShips;
+  // }
 }
