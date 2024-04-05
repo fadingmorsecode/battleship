@@ -5,6 +5,8 @@ export default class Gameboard {
     this.name = name;
     this.boardArr = [];
     this.placedShips = [];
+    this.missedShots = [];
+    this.hitShots = [];
     (() => {
       for (let i = 0; i < 10; i += 1) {
         for (let j = 1; j <= 10; j += 1) {
@@ -110,8 +112,29 @@ export default class Gameboard {
     }
   }
 
+  getShipFromCoordinate(coord) {
+    const shipsArr = this.placedShips;
+    let result;
+    shipsArr.forEach((ship) => {
+      const allShipCells = this.getAllCells(ship.coordinates, ship.length);
+      if (allShipCells.includes(coord)) {
+        result = ship;
+      }
+    });
+    return result;
+  }
+
   receiveAttack(location) {
     const shipsArr = this.getShips();
-    return shipsArr.flat().includes(location);
+    if (shipsArr.flat().includes(location) === true) {
+      const ship = this.getShipFromCoordinate(location);
+      ship.hit();
+      // keep track of hits
+      this.hitShots.push(location);
+      return true;
+    }
+    // keep track of missed shots
+    this.missedShots.push(location);
+    return false;
   }
 }

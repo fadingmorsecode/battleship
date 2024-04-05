@@ -175,4 +175,84 @@ describe('test receiveAttack function', () => {
     const attack = newBoard.receiveAttack('E9');
     expect(attack).toBeTruthy();
   });
+  test('should determine that a ship was hit w/ multiple ships', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName2 = 'Destroyer';
+    const newShip2 = new Ship(shipName2);
+    const placement2 = ['C4', 'C5'];
+    newBoard.placeShip(newShip2, placement2);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    const attack = newBoard.receiveAttack('E9');
+    expect(attack).toBeTruthy();
+  });
+  test('should determine if a ship was not hit', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    const attack = newBoard.receiveAttack('E5');
+    expect(attack).toBeFalsy();
+  });
+  test('should send hit function to ship that was hit', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    newBoard.receiveAttack('E9');
+    expect(newShip.hits).toEqual(1);
+  });
+  test('should keep track of missed shots', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    newBoard.receiveAttack('E5');
+    const expected = ['E5'];
+    expect(newBoard.missedShots).toEqual(expected);
+  });
+  test('should keep track of multiple missed shots', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    newBoard.receiveAttack('E5');
+    newBoard.receiveAttack('C1');
+    const expected = ['E5', 'C1'];
+    expect(newBoard.missedShots).toEqual(expected);
+  });
+  test('should keep track of hit shots', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    newBoard.receiveAttack('E9');
+    const expected = ['E9'];
+    expect(newBoard.hitShots).toEqual(expected);
+  });
+  test('should keep track of multiple shots', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    newBoard.receiveAttack('E9');
+    newBoard.receiveAttack('E10');
+    const expected = ['E9', 'E10'];
+    expect(newBoard.hitShots).toEqual(expected);
+  });
 });
