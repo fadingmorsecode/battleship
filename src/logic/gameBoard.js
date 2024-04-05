@@ -1,9 +1,5 @@
 const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-function interveningNums(num1, num2) {
-  return Math.abs(num1 - num2) - 1;
-}
-
 export default class Gameboard {
   constructor(name) {
     this.name = name;
@@ -20,7 +16,11 @@ export default class Gameboard {
     })();
   }
 
-  getAllCells(coords, length) {
+  static interveningNums(num1, num2) {
+    return Math.abs(num1 - num2) - 1;
+  }
+
+  static getAllCells(coords, length) {
     const allCells = [];
     const start = coords[0];
     const end = coords[1];
@@ -31,7 +31,7 @@ export default class Gameboard {
     const baseCoordAmount = 2;
     if (startX === endX && startY !== endY) {
       // horizontal condition
-      const distance = interveningNums(endY, startY);
+      const distance = Gameboard.interveningNums(endY, startY);
       const combined = baseCoordAmount + distance;
       if (combined === length) {
         // start coords
@@ -50,7 +50,7 @@ export default class Gameboard {
       // vertical condition
       const startIndex = letters.indexOf(startX);
       const endIndex = letters.indexOf(endX);
-      const distance = interveningNums(endIndex, startIndex);
+      const distance = Gameboard.interveningNums(endIndex, startIndex);
       const combined = baseCoordAmount + distance;
       if (combined === length) {
         // start coords
@@ -73,7 +73,7 @@ export default class Gameboard {
     const everyShipCell = [];
     this.placedShips.forEach((ship) => {
       const shipCoords = ship.coordinates;
-      const allCells = this.getAllCells(shipCoords, ship.length);
+      const allCells = Gameboard.getAllCells(shipCoords, ship.length);
       everyShipCell.push(allCells);
     });
     return everyShipCell;
@@ -86,13 +86,13 @@ export default class Gameboard {
       return false;
     }
     // get all cells of desired ship's coordinates
-    const allDesired = this.getAllCells(desiredCoords, desiredLength);
+    const allDesired = Gameboard.getAllCells(desiredCoords, desiredLength);
     // flattens everyShipCell array and checks if desired coords exist
     return allDesired.some((item) => everyCellArr.flat().includes(item));
   }
 
   isLegal(coords, length) {
-    const result = this.getAllCells(coords, length);
+    const result = Gameboard.getAllCells(coords, length);
     if (result !== false) {
       return true;
     }
@@ -114,7 +114,7 @@ export default class Gameboard {
     const shipsArr = this.placedShips;
     let result;
     shipsArr.forEach((ship) => {
-      const allShipCells = this.getAllCells(ship.coordinates, ship.length);
+      const allShipCells = Gameboard.getAllCells(ship.coordinates, ship.length);
       if (allShipCells.includes(coord)) {
         result = ship;
       }
