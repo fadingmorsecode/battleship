@@ -91,7 +91,7 @@ export default class Gameboard {
     return allDesired.some((item) => everyCellArr.flat().includes(item));
   }
 
-  isLegal(coords, length) {
+  static isLegal(coords, length) {
     const result = Gameboard.getAllCells(coords, length);
     if (result !== false) {
       return true;
@@ -100,7 +100,7 @@ export default class Gameboard {
   }
 
   placeShip(ship, loc) {
-    if (this.isLegal(loc, ship.length) !== false) {
+    if (Gameboard.isLegal(loc, ship.length) !== false) {
       // move is legal, check if occupied.
       if (this.isOccupied(loc, ship.length) === false) {
         // not occupied, update ships coords and place ship
