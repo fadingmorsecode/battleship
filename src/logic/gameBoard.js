@@ -1,5 +1,9 @@
 const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
+function interveningNums(num1, num2) {
+  return Math.abs(num1 - num2) - 1;
+}
+
 export default class Gameboard {
   constructor(name) {
     this.name = name;
@@ -27,7 +31,7 @@ export default class Gameboard {
     const baseCoordAmount = 2;
     if (startX === endX && startY !== endY) {
       // horizontal condition
-      const distance = this.interveningNums(endY, startY);
+      const distance = interveningNums(endY, startY);
       const combined = baseCoordAmount + distance;
       if (combined === length) {
         // start coords
@@ -46,7 +50,7 @@ export default class Gameboard {
       // vertical condition
       const startIndex = letters.indexOf(startX);
       const endIndex = letters.indexOf(endX);
-      const distance = this.interveningNums(endIndex, startIndex);
+      const distance = interveningNums(endIndex, startIndex);
       const combined = baseCoordAmount + distance;
       if (combined === length) {
         // start coords
@@ -85,10 +89,6 @@ export default class Gameboard {
     const allDesired = this.getAllCells(desiredCoords, desiredLength);
     // flattens everyShipCell array and checks if desired coords exist
     return allDesired.some((item) => everyCellArr.flat().includes(item));
-  }
-
-  interveningNums(num1, num2) {
-    return Math.abs(num1 - num2) - 1;
   }
 
   isLegal(coords, length) {
