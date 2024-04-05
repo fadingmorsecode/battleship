@@ -235,7 +235,7 @@ describe('test gameboard class', () => {
   });
 });
 
-describe.skip('test receiveAttack function', () => {
+describe('test receiveAttack function', () => {
   test('should determine that a ship was hit', () => {
     const boardName = 'CPU';
     const newBoard = new Gameboard(boardName);
