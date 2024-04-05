@@ -63,22 +63,26 @@ export default class Gameboard {
     return false;
   }
 
-  isOccupied(desiredCoords, desiredLength) {
+  getShips() {
     const everyShipCell = [];
-    // get every cell of each ship and pushes to
     this.placedShips.forEach((ship) => {
       const shipCoords = ship.coordinates;
       const allCells = this.getAllCells(shipCoords, ship.length);
       everyShipCell.push(allCells);
     });
+    return everyShipCell;
+  }
+
+  isOccupied(desiredCoords, desiredLength) {
+    const everyCellArr = this.getShips();
     // return false if no ships are placed
-    if (everyShipCell.length === 0) {
+    if (everyCellArr.length === 0) {
       return false;
     }
     // get all cells of desired ship's coordinates
     const allDesired = this.getAllCells(desiredCoords, desiredLength);
     // flattens everyShipCell array and checks if desired coords exist
-    return allDesired.some((item) => everyShipCell.flat().includes(item));
+    return allDesired.some((item) => everyCellArr.flat().includes(item));
   }
 
   interveningNums(num1, num2) {
@@ -104,5 +108,10 @@ export default class Gameboard {
       // push ship coordinates to placedShips array
       this.placedShips.push(ship);
     }
+  }
+
+  receiveAttack(location) {
+    const shipsArr = this.getShips();
+    return shipsArr.flat().includes(location);
   }
 }

@@ -163,3 +163,16 @@ describe('test gameboard class', () => {
     expect(newShip2.coordinates).toHaveLength(0);
   });
 });
+
+describe('test receiveAttack function', () => {
+  test('should determine that a ship was hit', () => {
+    const boardName = 'CPU';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['E8', 'E10'];
+    newBoard.placeShip(newShip, placement);
+    const attack = newBoard.receiveAttack('E9');
+    expect(attack).toBeTruthy();
+  });
+});
