@@ -83,8 +83,6 @@ export default class Gameboard {
     }
     // get all cells of desired ship's coordinates
     const allDesired = this.getAllCells(desiredCoords, desiredLength);
-    console.log(allDesired);
-    // console.log(allDesired);
     // flattens everyShipCell array and checks if desired coords exist
     return allDesired.some((item) => everyCellArr.flat().includes(item));
   }
@@ -138,7 +136,12 @@ export default class Gameboard {
     return false;
   }
 
-  // allSunk() {
-  //   const shipsArr = this.placedShips;
-  // }
+  allSunk() {
+    const shipsArr = this.placedShips;
+    const sunkArr = [];
+    shipsArr.forEach((ship) => {
+      sunkArr.push(ship.sunk);
+    });
+    return sunkArr.every((val) => val === true);
+  }
 }
