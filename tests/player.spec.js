@@ -36,4 +36,18 @@ describe('test player class', () => {
     newPlayer.attack(guess2, computerGameboard);
     expect(computerGameboard.hitShots).toEqual(['D3', 'D2']);
   });
+  test('computer should attack at random', () => {
+    const playerName = 'Player 1';
+    const newPlayer = new Player(playerName);
+    const playerGameboard = new Gameboard(playerName);
+    const computerName = 'CPU';
+    const newCPU = new Player(computerName);
+    const computerGameboard = new Gameboard(computerName);
+    const shipName = 'Cruiser';
+    const newShip = new Ship(shipName);
+    const placement = ['D2', 'D4'];
+    playerGameboard.placeShip(newShip, placement);
+    newCPU.computerAttack(playerGameboard);
+    expect(playerGameboard.hitShots).toEqual(['D3']);
+  });
 });

@@ -6,4 +6,8 @@ export default class Player {
   attack(location, board) {
     board.receiveAttack(location);
   }
+
+  computerAttack(board) {
+    board.receiveAttack('D3');
+  }
 }
