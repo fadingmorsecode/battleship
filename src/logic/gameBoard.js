@@ -7,6 +7,7 @@ export default class Gameboard {
     this.placedShips = [];
     this.missedShots = [];
     this.hitShots = [];
+    this.allGuesses = [];
     (() => {
       for (let i = 0; i < 10; i += 1) {
         for (let j = 1; j <= 10; j += 1) {
@@ -129,10 +130,12 @@ export default class Gameboard {
       ship.hit();
       // keep track of hits
       this.hitShots.push(location);
+      this.allGuesses.push(location);
       return true;
     }
     // keep track of missed shots
     this.missedShots.push(location);
+    this.allGuesses.push(location);
     return false;
   }
 

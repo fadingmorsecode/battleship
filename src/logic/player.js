@@ -7,7 +7,22 @@ export default class Player {
     board.receiveAttack(location);
   }
 
+  static getRandomValueNotInArr(allGuesses, possibleGuesses) {
+    let randomValue;
+    do {
+      randomValue =
+        possibleGuesses[Math.floor(Math.random() * possibleGuesses.length)];
+    } while (allGuesses.includes(randomValue));
+    return randomValue;
+  }
+
   computerAttack(board) {
-    board.receiveAttack('D3');
+    const { allGuesses } = board;
+    const possibleGuesses = board.boardArr;
+    const randomVal = Player.getRandomValueNotInArr(
+      allGuesses,
+      possibleGuesses,
+    );
+    board.receiveAttack(randomVal);
   }
 }

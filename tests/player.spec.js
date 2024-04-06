@@ -2,6 +2,13 @@ import Player from '../src/logic/player';
 import Gameboard from '../src/logic/gameBoard';
 import Ship from '../src/logic/ships';
 
+function removeValFromArr(val, arr) {
+  const arrCopy = Array.from(arr);
+  const index = arrCopy.indexOf(val);
+  arrCopy.splice(index, 1);
+  return arrCopy;
+}
+
 describe('test player class', () => {
   test('players should have names', () => {
     const playerName = 'CPU';
@@ -47,6 +54,9 @@ describe('test player class', () => {
     const newShip = new Ship(shipName);
     const placement = ['D2', 'D4'];
     playerGameboard.placeShip(newShip, placement);
+    const guesses = removeValFromArr('D3', playerGameboard.boardArr);
+    // leave only one guess for the computer to randomly but possibly choose.
+    playerGameboard.allGuesses = guesses;
     newCPU.computerAttack(playerGameboard);
     expect(playerGameboard.hitShots).toEqual(['D3']);
   });
