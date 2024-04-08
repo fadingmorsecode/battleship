@@ -1,5 +1,6 @@
 import createPlayer from './createPlayer';
 import createBoard from './createBoard';
+import placeAllShips from './placeAllShips';
 
 export default function startGame() {
   const playerOneName = 'PlayerOne';
@@ -8,9 +9,6 @@ export default function startGame() {
   const computer = createPlayer(computerName);
   const playerOneBoard = createBoard(playerOneName);
   const computerBoard = createBoard(computerName);
-  // work on placeAllShips for computer
-  // commit
-  // make it call the placeAllShips func for player
-  // make it call the placeAllShips func for computer
-  // commit
+  placeAllShips(playerOneBoard);
+  placeAllShips(computerBoard);
 }

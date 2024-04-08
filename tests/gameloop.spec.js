@@ -1,32 +1,41 @@
-import createPlayer from '../src/logic/loop/createPlayer';
-import createBoard from '../src/logic/loop/createBoard';
+import * as createBoardModule from '../src/logic/loop/createBoard';
+import * as createPlayerModule from '../src/logic/loop/createPlayer';
 import startGame from '../src/logic/loop/gameloop';
 import Gameboard from '../src/logic/gameBoard';
-import placeAllShips from '../src/logic/loop/placeAllShips';
+import * as placeAllShipsModule from '../src/logic/loop/placeAllShips';
 
-jest.mock('../src/logic/loop/createPlayer', () => jest.fn());
-jest.mock('../src/logic/loop/createBoard');
+let createBoardSpy;
+let createPlayerSpy;
+let placeAllSpy;
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  createBoardSpy = jest.spyOn(createBoardModule, 'default');
+  createPlayerSpy = jest.spyOn(createPlayerModule, 'default');
+  placeAllSpy = jest.spyOn(placeAllShipsModule, 'default');
+});
+
+afterEach(() => {
+  createBoardSpy.mockRestore();
+  createPlayerSpy.mockRestore();
+  placeAllSpy.mockRestore();
 });
 
 describe('test creation of player and board objects', () => {
   test('startGame calls createPlayer', () => {
     startGame();
-    expect(createPlayer).toHaveBeenCalled();
+    expect(createPlayerSpy).toHaveBeenCalled();
   });
   test('startGame calls createPlayer twice', () => {
     startGame();
-    expect(createPlayer).toHaveBeenCalledTimes(2);
+    expect(createPlayerSpy).toHaveBeenCalledTimes(2);
   });
   test('startGame calls createBoard', () => {
     startGame();
-    expect(createBoard).toHaveBeenCalled();
+    expect(createBoardSpy).toHaveBeenCalled();
   });
   test('startGame calls createBoard twice', () => {
     startGame();
-    expect(createBoard).toHaveBeenCalledTimes(2);
+    expect(createBoardSpy).toHaveBeenCalledTimes(2);
   });
 });
 
@@ -34,7 +43,7 @@ describe('test placement of ships', () => {
   test('should place ships on player board', () => {
     const playerName = 'PlayerOne';
     const playerBoard = new Gameboard(playerName);
-    placeAllShips(playerBoard, playerName);
+    placeAllShipsModule.default(playerBoard, playerName);
     const expected = [
       {
         name: 'Carrier',
@@ -77,7 +86,7 @@ describe('test placement of ships', () => {
   test('should place ships on computer board', () => {
     const computerName = 'CPU';
     const computerBoard = new Gameboard(computerName);
-    placeAllShips(computerBoard, computerName);
+    placeAllShipsModule.default(computerBoard, computerName);
     const expected = [
       {
         name: 'Carrier',
@@ -116,5 +125,16 @@ describe('test placement of ships', () => {
       },
     ];
     expect(computerBoard.placedShips).toEqual(expected);
+  });
+});
+
+describe('gameloop creation and placement of ships', () => {
+  test('should call placeAllShips once', () => {
+    startGame();
+    expect(placeAllSpy).toHaveBeenCalled();
+  });
+  test('should call placeAllShips twice', () => {
+    startGame();
+    expect(placeAllSpy).toHaveBeenCalledTimes(2);
   });
 });
