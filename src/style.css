@@ -1,0 +1,18 @@
+body {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  grid-template-rows: 1fr 8fr 1fr;
+}
+
+header {
+  background-color: #ef6f6c;
+}
+
+main {
+  background-color: #59c9a5;
+}
+
+footer {
+}
