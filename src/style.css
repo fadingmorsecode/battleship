@@ -1,3 +1,6 @@
+* {
+}
+
 body {
   display: grid;
   height: 100vh;
@@ -7,12 +10,60 @@ body {
 }
 
 header {
-  background-color: #ef6f6c;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.header-text {
+  font-size: 2rem;
+  color: #465775;
 }
 
 main {
   background-color: #59c9a5;
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+  overflow: hidden;
+}
+
+.main-player-texts {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+  align-items: center;
+}
+
+.main-player-texts p {
+  font-size: 1.2rem;
+}
+
+.board-containers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: pink;
+  justify-items: center;
+  align-content: center;
+}
+
+.player-board-container {
+  background-color: white;
+  height: 450px;
+  width: 450px;
+}
+
+.computer-board-container {
+  background-color: white;
+  height: 450px;
+  width: 450px;
 }
 
 footer {
+  background-color: lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
 }
