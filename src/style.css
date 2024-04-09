@@ -98,7 +98,6 @@ main {
 
 .player-board,
 .computer-board {
-  background-color: #7ebdc2;
   width: 450px;
   height: 450px;
   display: grid;
