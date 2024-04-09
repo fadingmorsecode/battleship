@@ -24,11 +24,11 @@ export default function placeAllShips(board, name) {
     new Ship('Submarine'),
     new Ship('Cruiser'),
   ];
-  if (board.name === 'PlayerOne') {
+  if (board.name === 'player') {
     for (let i = 0; i < ShipObj.length; i += 1) {
       board.placeShip(ShipObj[i], playerShipLocs[i]);
     }
-  } else if (board.name === 'CPU') {
+  } else if (board.name === 'cpu') {
     for (let i = 0; i < ShipObj.length; i += 1) {
       board.placeShip(ShipObj[i], computerShipLocs[i]);
     }

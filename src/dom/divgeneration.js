@@ -9,7 +9,6 @@ export default function generateDivs(boardName) {
       const newDiv = document.createElement('div');
       newDiv.setAttribute('coordinate', `${letters[i]}${j}`);
       newDiv.setAttribute('boardName', boardName);
-      console.log(newDiv);
       if (boardName === 'player') {
         playerBoard.appendChild(newDiv);
       } else {

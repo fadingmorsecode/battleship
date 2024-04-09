@@ -128,7 +128,7 @@ describe('test gameboard class', () => {
   });
   // eslint-disable-next-line jest/no-disabled-tests
   test('should prevent diagonal placement', () => {
-    const boardName = 'Player';
+    const boardName = 'player';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Destroyer';
     const newShip = new Ship(shipName);
@@ -137,7 +137,7 @@ describe('test gameboard class', () => {
     expect(newShip.coordinates).toHaveLength(0);
   });
   test('should prevent ships from overlapping', () => {
-    const boardName = 'Player';
+    const boardName = 'player';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -150,7 +150,7 @@ describe('test gameboard class', () => {
     expect(newShip2.coordinates).toHaveLength(0);
   });
   test('should prevent ships from overlapping when second ship is vertical', () => {
-    const boardName = 'Player';
+    const boardName = 'player';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -163,7 +163,7 @@ describe('test gameboard class', () => {
     expect(newShip2.coordinates).toHaveLength(0);
   });
   test('should prevent ship from being placed when coords are longer', () => {
-    const boardName = 'Player';
+    const boardName = 'player';
     const newBoard = new Gameboard(boardName);
     const shipName5 = 'Carrier';
     const newShip5 = new Ship(shipName5);
@@ -172,7 +172,7 @@ describe('test gameboard class', () => {
     expect(newBoard.placedShips).toHaveLength(0);
   });
   test('should report if all ships are sunk', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -203,7 +203,7 @@ describe('test gameboard class', () => {
     expect(sunkResult).toBeTruthy();
   });
   test('should return false if all ships are not sunk', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -237,7 +237,7 @@ describe('test gameboard class', () => {
 
 describe('test receiveAttack function', () => {
   test('should determine that a ship was hit', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -247,7 +247,7 @@ describe('test receiveAttack function', () => {
     expect(attack).toBeTruthy();
   });
   test('should determine that a ship was hit w/ multiple ships', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName2 = 'Destroyer';
     const newShip2 = new Ship(shipName2);
@@ -261,7 +261,7 @@ describe('test receiveAttack function', () => {
     expect(attack).toBeTruthy();
   });
   test('should determine if a ship was not hit', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -271,7 +271,7 @@ describe('test receiveAttack function', () => {
     expect(attack).toBeFalsy();
   });
   test('should send hit function to ship that was hit', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -281,7 +281,7 @@ describe('test receiveAttack function', () => {
     expect(newShip.hits).toEqual(1);
   });
   test('should keep track of missed shots', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -292,7 +292,7 @@ describe('test receiveAttack function', () => {
     expect(newBoard.missedShots).toEqual(expected);
   });
   test('should keep track of multiple missed shots', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -304,7 +304,7 @@ describe('test receiveAttack function', () => {
     expect(newBoard.missedShots).toEqual(expected);
   });
   test('should keep track of hit shots', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
@@ -315,7 +315,7 @@ describe('test receiveAttack function', () => {
     expect(newBoard.hitShots).toEqual(expected);
   });
   test('should keep track of multiple shots', () => {
-    const boardName = 'CPU';
+    const boardName = 'cpu';
     const newBoard = new Gameboard(boardName);
     const shipName = 'Cruiser';
     const newShip = new Ship(shipName);
