@@ -1,10 +1,24 @@
 import Gameboard from '../logic/gameBoard';
 
+// associative array
+
+export const associatedPlayerCells = [];
+export const associatedComputerCells = [];
+
 function associateWithAttribute(cell, user, ship) {
   const element = document.querySelector(
     `[coordinate=${cell}][boardName=${user}]`,
   );
-  element.setAttribute('ship', ship.name);
+  const elementObj = {};
+  elementObj.cell = cell;
+  elementObj.boardName = user;
+  elementObj.ship = ship;
+
+  if (user === 'player') {
+    associatedPlayerCells.push(elementObj);
+  } else {
+    associatedComputerCells.push(elementObj);
+  }
 }
 
 export default function associateCells(board) {

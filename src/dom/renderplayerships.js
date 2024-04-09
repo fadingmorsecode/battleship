@@ -1,9 +1,9 @@
 import Gameboard from '../logic/gameBoard';
 import getDomCell from './getdomcell';
 
-function addColor(cell) {
+function afloat(cell) {
   const elementToColor = cell;
-  elementToColor.style.backgroundColor = 'green';
+  elementToColor.classList.add('afloat');
 }
 
 export default function renderPlayerShips(board) {
@@ -14,7 +14,7 @@ export default function renderPlayerShips(board) {
     const allCells = Gameboard.getAllCells(ship.coordinates, ship.length);
     allCells.forEach((cell) => {
       const domCell = getDomCell(cell, board.name);
-      addColor(domCell);
+      afloat(domCell);
     });
   });
 }
