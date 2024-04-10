@@ -30,8 +30,10 @@ export default function startGame() {
 
   placeAllShips(playerOneBoard);
   placeAllShips(computerBoard);
+
   associateCells(playerOneBoard);
   associateCells(computerBoard);
+
   renderPlayerShips(playerOneBoard);
   loadAttackListener();
 }

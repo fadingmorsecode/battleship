@@ -4,7 +4,7 @@ export default class Player {
   }
 
   attack(location, board) {
-    board.receiveAttack(location);
+    return board.receiveAttack(location);
   }
 
   static getRandomValueNotInArr(allGuesses, possibleGuesses) {
