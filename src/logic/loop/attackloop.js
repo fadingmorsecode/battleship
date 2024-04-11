@@ -2,6 +2,7 @@ import { userBoardArr, userObjArr } from './storage';
 import { toggleTurn } from './turns';
 import endGame from './endgame';
 import checkSunk from './checkSunk';
+import waitOneSecond from './sleep';
 
 function toggleMiss(cell) {
   cell.classList.add('miss');
@@ -39,7 +40,7 @@ function triggerCompAttack() {
   }
 }
 
-export default function triggerPlayerAttack(cell, user) {
+export default async function triggerPlayerAttack(cell, user) {
   if (user === 'player') {
     const cellCoordinate = cell.getAttribute('coordinate');
     if (!userBoardArr[1].allGuesses.includes(cellCoordinate)) {
@@ -57,6 +58,7 @@ export default function triggerPlayerAttack(cell, user) {
         endGame('player');
       }
       toggleTurn();
+      await waitOneSecond();
       triggerCompAttack();
       toggleTurn();
     }
