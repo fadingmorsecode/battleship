@@ -23,6 +23,11 @@ export default class Player {
       allGuesses,
       possibleGuesses,
     );
-    board.receiveAttack(randomVal);
+    const compReturn = board.receiveAttack(randomVal);
+    const returnVals = {
+      successful: compReturn,
+      coordinate: randomVal,
+    };
+    return returnVals;
   }
 }
