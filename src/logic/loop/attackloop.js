@@ -1,5 +1,7 @@
 import { userBoardArr, userObjArr } from './storage';
 import { toggleTurn } from './turns';
+import endgame from './endgame';
+import checkSunk from './checkSunk';
 
 function toggleMiss(cell) {
   cell.classList.add('miss');
@@ -31,6 +33,10 @@ function triggerCompAttack() {
   } else if (compAttack.successful !== true) {
     toggleMiss(attackedDiv);
   }
+  const allSunkPlayerBoard = checkSunk(userBoardArr[0]);
+  if (allSunkPlayerBoard === true) {
+    endgame('computer');
+  }
 }
 
 export default function triggerPlayerAttack(cell, user) {
@@ -45,6 +51,10 @@ export default function triggerPlayerAttack(cell, user) {
         toggleHit(cell);
       } else {
         toggleMiss(cell);
+      }
+      const allSunkCompBoard = checkSunk(userBoardArr[1]);
+      if (allSunkCompBoard === true) {
+        endgame('player');
       }
       toggleTurn();
       triggerCompAttack();
