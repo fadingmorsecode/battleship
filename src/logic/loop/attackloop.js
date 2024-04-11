@@ -1,6 +1,6 @@
 import { userBoardArr, userObjArr } from './storage';
 import { toggleTurn } from './turns';
-import endgame from './endgame';
+import endGame from './endgame';
 import checkSunk from './checkSunk';
 
 function toggleMiss(cell) {
@@ -35,7 +35,7 @@ function triggerCompAttack() {
   }
   const allSunkPlayerBoard = checkSunk(userBoardArr[0]);
   if (allSunkPlayerBoard === true) {
-    endgame('computer');
+    endGame('computer');
   }
 }
 
@@ -54,7 +54,7 @@ export default function triggerPlayerAttack(cell, user) {
       }
       const allSunkCompBoard = checkSunk(userBoardArr[1]);
       if (allSunkCompBoard === true) {
-        endgame('player');
+        endGame('player');
       }
       toggleTurn();
       triggerCompAttack();

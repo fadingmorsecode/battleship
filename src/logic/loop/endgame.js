@@ -1,6 +1,6 @@
 import { changeStatusToFalse } from './gamestatus';
 
-export default function endgame(user) {
+export default function endGame(user) {
   changeStatusToFalse();
   if (user === 'player') {
     console.log('player wins');
