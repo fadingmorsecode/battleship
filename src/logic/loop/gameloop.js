@@ -18,8 +18,7 @@ export default function startGame() {
   const computerBoard = createBoard(computerName);
   addToBoardArr(playerOneBoard);
   addToBoardArr(computerBoard);
-
-  placeAllShips(playerOneBoard);
+  // replace the below with a function maybe asynchronous
   placeAllShips(computerBoard);
 
   renderPlayerShips(playerOneBoard);
