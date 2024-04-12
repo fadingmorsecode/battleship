@@ -1,4 +1,5 @@
 import loadInput from './createinput';
+import removeInput from './removeinput';
 import setLabel from './setlabel';
 import setPlaceholder from './setplaceholder';
 
@@ -19,9 +20,9 @@ function coordConditions(ship) {
   }
 }
 
-function ask(ship, condition) {
+export function ask(ship, condition, iteration) {
   return new Promise((resolve, reject) => {
-    loadInput();
+    loadInput(iteration);
     const form = document.querySelector('form');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -37,7 +38,13 @@ function ask(ship, condition) {
 
 async function getShipInput(validate, ship, length) {
   return new Promise((resolve, reject) => {
-    ask(ship, coordConditions(ship));
+    const valArr = [];
+    ask(ship, coordConditions(ship), 'Enter first coordinate').then((val) => {
+      valArr.push(val);
+    });
+    ask(ship, coordConditions(ship), 'Enter second coordinate').then((val) => {
+      valArr.push(val);
+    });
   });
 }
 

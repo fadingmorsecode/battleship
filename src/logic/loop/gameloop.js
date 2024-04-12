@@ -5,6 +5,7 @@ import renderPlayerShips from '../../dom/renderplayerships';
 import { addToBoardArr, addToObjArr } from './storage';
 import loadAttackListener from '../../dom/attacklistener';
 import { changeStatusToTrue } from './gamestatus';
+import { ask } from './promptships';
 
 export default function startGame() {
   changeStatusToTrue();
@@ -19,6 +20,7 @@ export default function startGame() {
   addToBoardArr(playerOneBoard);
   addToBoardArr(computerBoard);
   // replace the below with a function maybe asynchronous
+  ask('Cruiser', 'Length of 3 cells', 'Enter first coordinate');
   placeAllShips(computerBoard);
 
   renderPlayerShips(playerOneBoard);
