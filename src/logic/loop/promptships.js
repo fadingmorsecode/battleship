@@ -2,6 +2,8 @@ import loadInput from './createinput';
 import removeInput from './removeinput';
 import setLabel from './setlabel';
 import setPlaceholder from './setplaceholder';
+import Ship from '../ships';
+import renderPlayerShips from '../../dom/renderplayerships';
 
 function coordConditions(ship) {
   switch (ship) {
@@ -20,8 +22,8 @@ function coordConditions(ship) {
   }
 }
 
-export function ask(ship, condition, iteration) {
-  return new Promise((resolve, reject) => {
+function ask(ship, condition, iteration) {
+  return new Promise((resolve) => {
     loadInput(iteration);
     const form = document.querySelector('form');
     form.addEventListener('submit', (e) => {
@@ -36,32 +38,70 @@ export function ask(ship, condition, iteration) {
   });
 }
 
-async function getShipInput(validate, ship, length) {
-  return new Promise((resolve, reject) => {
+function getCoordInputs(ship) {
+  return new Promise((resolve) => {
     const valArr = [];
-    ask(ship, coordConditions(ship), 'Enter first coordinate').then((val) => {
-      valArr.push(val);
-    });
-    ask(ship, coordConditions(ship), 'Enter second coordinate').then((val) => {
-      valArr.push(val);
-    });
+    async function askForCoordinates() {
+      await ask(ship, coordConditions(ship), 'Enter first coordinate').then(
+        (val) => {
+          valArr.push(val);
+          removeInput();
+        },
+      );
+      await ask(ship, coordConditions(ship), 'Enter second coordinate').then(
+        (val) => {
+          loadInput();
+          valArr.push(val);
+          removeInput();
+          resolve(valArr);
+        },
+      );
+    }
+    askForCoordinates();
   });
 }
 
-async function getCarrier() {}
-async function getDestroyer() {}
-async function getBattleship() {}
-async function getSubmarine() {}
-async function getCruiser() {}
+function getCarrier(board, ship) {
+  return new Promise((resolve) => {
+    async function placeCarrier() {
+      await getCoordInputs('Carrier').then((location) => {
+        const tryPlacement = board.placeShip(ship, location);
+        if (tryPlacement === true) {
+          console.log(tryPlacement);
+          console.log('should succeed');
+          resolve();
+          return;
+        }
+        console.log('Placement not successful');
+        placeCarrier();
+      });
+    }
+    placeCarrier();
+  });
+}
 
-async function getPlayerInputs() {
-  const getCarrierResult = await getCarrier();
+// async function getDestroyer() {}
+// async function getBattleship() {}
+// async function getSubmarine() {}
+// async function getCruiser() {}
 
-  const getDestroyerResult = await getDestroyer();
+export default async function getPlayerInputs(board) {
+  const ShipObj = [
+    new Ship('Carrier'),
+    new Ship('Destroyer'),
+    new Ship('Battleship'),
+    new Ship('Submarine'),
+    new Ship('Cruiser'),
+  ];
 
-  const getBattleshipResult = await getBattleShip();
+  const getCarrierResult = await getCarrier(board, ShipObj[0]);
+  renderPlayerShips(board);
+  console.log(board);
+  // const getDestroyerResult = await getDestroyer();
 
-  const getSubmarineResult = await getSubmarine();
+  // const getBattleshipResult = await getBattleShip();
 
-  const getCruiserResult = await getCruiser();
+  // const getSubmarineResult = await getSubmarine();
+
+  // const getCruiserResult = await getCruiser();
 }

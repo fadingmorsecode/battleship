@@ -16,7 +16,7 @@ const computerShipLocs = [
   ['H5', 'J5'],
 ];
 
-export default function placeAllShips(board, name) {
+export default function placeAllShips(board) {
   const ShipObj = [
     new Ship('Carrier'),
     new Ship('Destroyer'),

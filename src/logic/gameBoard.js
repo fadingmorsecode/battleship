@@ -107,8 +107,10 @@ export default class Gameboard {
         // not occupied, update ships coords and place ship
         ship.updateCoordinates(loc);
         this.placedShips.push(ship);
+        return true;
       }
     }
+    return false;
   }
 
   getShipFromCoordinate(coord) {
