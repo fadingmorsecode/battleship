@@ -45,45 +45,37 @@ function getCoordInputs(ship) {
       await ask(ship, coordConditions(ship), 'Enter first coordinate').then(
         (val) => {
           valArr.push(val);
-          removeInput();
         },
       );
+      removeInput();
       await ask(ship, coordConditions(ship), 'Enter second coordinate').then(
         (val) => {
-          loadInput();
           valArr.push(val);
-          removeInput();
           resolve(valArr);
         },
       );
+      removeInput();
     }
     askForCoordinates();
   });
 }
 
-function getCarrier(board, ship) {
+function getShip(board, ship) {
   return new Promise((resolve) => {
-    async function placeCarrier() {
-      await getCoordInputs('Carrier').then((location) => {
+    async function placeOnBoard() {
+      await getCoordInputs(ship.name).then((location) => {
         const tryPlacement = board.placeShip(ship, location);
         if (tryPlacement === true) {
-          console.log(tryPlacement);
-          console.log('should succeed');
           resolve();
-          return;
+        } else {
+          console.log('Placement not successful');
+          placeOnBoard();
         }
-        console.log('Placement not successful');
-        placeCarrier();
       });
     }
-    placeCarrier();
+    placeOnBoard();
   });
 }
-
-// async function getDestroyer() {}
-// async function getBattleship() {}
-// async function getSubmarine() {}
-// async function getCruiser() {}
 
 export default async function getPlayerInputs(board) {
   const ShipObj = [
@@ -94,14 +86,15 @@ export default async function getPlayerInputs(board) {
     new Ship('Cruiser'),
   ];
 
-  const getCarrierResult = await getCarrier(board, ShipObj[0]);
+  const getCarrierResult = await getShip(board, ShipObj[0]);
   renderPlayerShips(board);
   console.log(board);
-  // const getDestroyerResult = await getDestroyer();
-
-  // const getBattleshipResult = await getBattleShip();
-
-  // const getSubmarineResult = await getSubmarine();
-
-  // const getCruiserResult = await getCruiser();
+  const getDestroyerResult = await getShip(board, ShipObj[1]);
+  renderPlayerShips(board);
+  const getBattleshipResult = await getShip(board, ShipObj[2]);
+  renderPlayerShips(board);
+  const getSubmarineResult = await getShip(board, ShipObj[3]);
+  renderPlayerShips(board);
+  const getCruiserResult = await getShip(board, ShipObj[4]);
+  renderPlayerShips(board);
 }
