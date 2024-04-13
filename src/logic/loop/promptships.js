@@ -28,13 +28,11 @@ function ask(ship, condition, iteration) {
     const form = document.querySelector('form');
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-    });
-    setPlaceholder(condition);
-    setLabel(ship);
-    form.addEventListener('submit', () => {
       const input = document.querySelector('input');
       resolve(input.value);
     });
+    setPlaceholder(condition);
+    setLabel(ship);
   });
 }
 
@@ -60,20 +58,40 @@ function getCoordInputs(ship) {
   });
 }
 
+// function getShip(board, ship) {
+//   return new Promise((resolve) => {
+//     async function placeOnBoard() {
+//       await getCoordInputs(ship.name).then((location) => {
+//         const tryPlacement = board.placeShip(ship, location);
+//         if (tryPlacement === true) {
+//           resolve();
+//         } else {
+//           console.log('Placement not successful');
+//           placeOnBoard(); // Try again
+//         }
+//       });
+//     }
+//     placeOnBoard();
+//   });
+// }
+
 function getShip(board, ship) {
-  return new Promise((resolve) => {
-    async function placeOnBoard() {
-      await getCoordInputs(ship.name).then((location) => {
-        const tryPlacement = board.placeShip(ship, location);
-        if (tryPlacement === true) {
-          resolve();
-        } else {
-          console.log('Placement not successful');
-          placeOnBoard();
-        }
-      });
+  return new Promise(async (resolve) => {
+    async function tryPlacement(location) {
+      if (!location) {
+        location = await getCoordInputs(ship.name);
+      }
+
+      const tryPlacementResult = await board.placeShip(ship, location);
+
+      if (tryPlacementResult) {
+        resolve();
+      } else {
+        console.log('not successful');
+        await tryPlacement(await getCoordInputs(ship.name)); // retrying
+      }
     }
-    placeOnBoard();
+    await tryPlacement();
   });
 }
 
@@ -88,7 +106,6 @@ export default async function getPlayerInputs(board) {
 
   const getCarrierResult = await getShip(board, ShipObj[0]);
   renderPlayerShips(board);
-  console.log(board);
   const getDestroyerResult = await getShip(board, ShipObj[1]);
   renderPlayerShips(board);
   const getBattleshipResult = await getShip(board, ShipObj[2]);
