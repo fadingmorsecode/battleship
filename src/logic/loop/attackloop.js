@@ -1,5 +1,5 @@
 import { userBoardArr, userObjArr } from './storage';
-import { toggleTurn } from './turns';
+import { toggleTurn, turnText } from './turns';
 import endGame from './endgame';
 import checkSunk from './checkSunk';
 import waitOneSecond from './sleep';
@@ -58,9 +58,11 @@ export default async function triggerPlayerAttack(cell, user) {
         endGame('player');
       }
       toggleTurn();
+      console.log(turnText());
       await waitOneSecond();
       triggerCompAttack();
       toggleTurn();
+      console.log(turnText());
     }
   }
 }
