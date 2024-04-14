@@ -30,7 +30,7 @@ function ask(ship, condition, iteration, retried) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const input = document.querySelector('input');
-      resolve(input.value);
+      resolve(input.value.toUpperCase());
     });
     setPlaceholder(condition);
     setLabel(ship);
