@@ -7,8 +7,7 @@ import loadAttackListener from '../../dom/attacklistener';
 import { changeStatusToTrue } from './gamestatus';
 import getPlayerInputs from './promptships';
 
-export default function startGame() {
-  changeStatusToTrue();
+export default async function startGame() {
   const playerOneName = 'player';
   const computerName = 'cpu';
   const playerOne = createPlayer(playerOneName);
@@ -19,10 +18,9 @@ export default function startGame() {
   const computerBoard = createBoard(computerName);
   addToBoardArr(playerOneBoard);
   addToBoardArr(computerBoard);
-  // replace the below with a function maybe asynchronous
-  getPlayerInputs(playerOneBoard);
-  placeAllShips(computerBoard);
 
-  renderPlayerShips(playerOneBoard);
+  await getPlayerInputs(playerOneBoard);
+  placeAllShips(computerBoard);
+  changeStatusToTrue();
   loadAttackListener();
 }
