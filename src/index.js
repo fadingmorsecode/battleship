@@ -1,8 +1,7 @@
 import css from './style.css';
 import generateDivs from './dom/divgeneration';
-import renderPlayerShips from './dom/renderplayerships';
-import startGame from './logic/loop/gameloop';
+import loadStartGameButton from './logic/loop/startgamebutton';
 
 generateDivs('player');
 generateDivs('cpu');
-startGame();
+loadStartGameButton();

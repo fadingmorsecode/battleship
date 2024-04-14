@@ -28,6 +28,17 @@ header {
   margin: 0;
 }
 
+.start-game-btn {
+  border: solid 4px #bb4430;
+  border-radius: 5px;
+  width: 8rem;
+  height: 2rem;
+}
+
+.start-game-btn:hover {
+  cursor: pointer;
+}
+
 .error-text {
   color: red;
 }
@@ -147,6 +158,12 @@ main {
 .player-board > div,
 .computer-board > div {
   border: solid 1px black;
+}
+
+.player-board > div:hover,
+.computer-board > div:hover {
+  transform: scale(1.2);
+  border-color: red;
 }
 
 .board-and-text {
