@@ -1,12 +1,12 @@
 import createPlayer from './createPlayer';
 import createBoard from './createBoard';
 import placeAllShips from './placeAllShips';
-import renderPlayerShips from '../../dom/renderplayerships';
 import { addToBoardArr, addToObjArr } from './storage';
 import loadAttackListener from '../../dom/attacklistener';
 import { changeStatusToTrue } from './gamestatus';
 import getPlayerInputs from './promptships';
 import { turnText } from './turns';
+import changeInfoText from './changeinfotext';
 
 export default async function startGame() {
   const playerOneName = 'player';
@@ -24,5 +24,5 @@ export default async function startGame() {
   placeAllShips(computerBoard);
   changeStatusToTrue();
   loadAttackListener();
-  console.log(turnText());
+  changeInfoText(turnText());
 }

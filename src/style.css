@@ -82,8 +82,18 @@ main {
 .board-containers {
   display: flex;
   padding: 30px;
-  gap: 10rem;
+  gap: 2rem;
   justify-content: center;
+}
+
+.middle-container {
+  width: 11rem;
+  display: flex;
+  justify-content: center;
+}
+
+.dynamic-info-text {
+  font-size: 1.4rem;
 }
 
 .player-board-container,

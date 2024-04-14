@@ -3,6 +3,7 @@ import { toggleTurn, turnText } from './turns';
 import endGame from './endgame';
 import checkSunk from './checkSunk';
 import waitOneSecond from './sleep';
+import changeInfoText from './changeinfotext';
 
 function toggleMiss(cell) {
   cell.classList.add('miss');
@@ -37,6 +38,7 @@ function triggerCompAttack() {
   const allSunkPlayerBoard = checkSunk(userBoardArr[0]);
   if (allSunkPlayerBoard === true) {
     endGame('computer');
+    return 'allSunk';
   }
 }
 
@@ -56,13 +58,18 @@ export default async function triggerPlayerAttack(cell, user) {
       const allSunkCompBoard = checkSunk(userBoardArr[1]);
       if (allSunkCompBoard === true) {
         endGame('player');
+        return;
       }
       toggleTurn();
-      console.log(turnText());
+      changeInfoText(turnText());
       await waitOneSecond();
-      triggerCompAttack();
+      const playerSunkResult = triggerCompAttack();
+      if (playerSunkResult === 'allSunk') {
+        // stop here if all player ships are sunk
+        return;
+      }
       toggleTurn();
-      console.log(turnText());
+      changeInfoText(turnText());
     }
   }
 }

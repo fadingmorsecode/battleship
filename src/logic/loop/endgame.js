@@ -1,12 +1,12 @@
+import changeInfoText from './changeinfotext';
 import { changeStatusToFalse } from './gamestatus';
 
 export default function endGame(user) {
   changeStatusToFalse();
   if (user === 'player') {
-    console.log('player wins');
-    // player wins action
+    changeInfoText('You win!');
   } else {
-    console.log('computer wins');
-    // computer wins action
+    changeInfoText('You lose!');
   }
+  // should create new game button (same functionality as a reset, just changing name of button)
 }
