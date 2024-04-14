@@ -4,6 +4,7 @@ import setLabel from './setlabel';
 import setPlaceholder from './setplaceholder';
 import Ship from '../ships';
 import renderPlayerShips from '../../dom/renderplayerships';
+import showError from './showerror';
 
 function coordConditions(ship) {
   switch (ship) {
@@ -22,7 +23,7 @@ function coordConditions(ship) {
   }
 }
 
-function ask(ship, condition, iteration) {
+function ask(ship, condition, iteration, retried) {
   return new Promise((resolve) => {
     loadInput(iteration);
     const form = document.querySelector('form');
@@ -33,18 +34,24 @@ function ask(ship, condition, iteration) {
     });
     setPlaceholder(condition);
     setLabel(ship);
+    if (retried === true) {
+      showError();
+    }
   });
 }
 
-function getCoordInputs(ship) {
+function getCoordInputs(ship, retried) {
   return new Promise((resolve) => {
     const valArr = [];
     async function askForCoordinates() {
-      await ask(ship, coordConditions(ship), 'Enter first coordinate').then(
-        (val) => {
-          valArr.push(val);
-        },
-      );
+      await ask(
+        ship,
+        coordConditions(ship),
+        'Enter first coordinate',
+        retried,
+      ).then((val) => {
+        valArr.push(val);
+      });
       removeInput();
       await ask(ship, coordConditions(ship), 'Enter second coordinate').then(
         (val) => {
@@ -78,8 +85,10 @@ function getCoordInputs(ship) {
 function getShip(board, ship) {
   return new Promise(async (resolve) => {
     async function tryPlacement(location) {
+      let retried;
       if (!location) {
-        location = await getCoordInputs(ship.name);
+        retried = false;
+        location = await getCoordInputs(ship.name, retried);
       }
 
       const tryPlacementResult = await board.placeShip(ship, location);
@@ -87,8 +96,8 @@ function getShip(board, ship) {
       if (tryPlacementResult) {
         resolve();
       } else {
-        console.log('not successful');
-        await tryPlacement(await getCoordInputs(ship.name)); // retrying
+        retried = true;
+        await tryPlacement(await getCoordInputs(ship.name, retried)); // retrying
       }
     }
     await tryPlacement();
