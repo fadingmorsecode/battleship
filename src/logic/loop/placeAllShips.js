@@ -30,7 +30,7 @@ export default function placeAllShips(board) {
     }
   } else if (board.name === 'cpu') {
     for (let i = 0; i < ShipObj.length; i += 1) {
-      board.placeShip(ShipObj[i], computerShipLocs[i]);
+      board.placeShip(ShipObj[i], computerShipLocs[i], board);
     }
   }
 }

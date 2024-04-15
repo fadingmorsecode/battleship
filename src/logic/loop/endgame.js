@@ -8,5 +8,4 @@ export default function endGame(user) {
   } else {
     changeInfoText('You lose!');
   }
-  // should create new game button (same functionality as a reset, just changing name of button)
 }

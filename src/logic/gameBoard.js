@@ -100,13 +100,14 @@ export default class Gameboard {
     return false;
   }
 
-  placeShip(ship, loc) {
+  placeShip(ship, loc, board) {
     if (Gameboard.isLegal(loc, ship.length) !== false) {
       // move is legal, check if occupied.
       if (this.isOccupied(loc, ship.length) === false) {
         // not occupied, update ships coords and place ship
         ship.updateCoordinates(loc);
         this.placedShips.push(ship);
+        ship.addOwner(board);
         return true;
       }
     }

@@ -91,7 +91,7 @@ function getShip(board, ship) {
         location = await getCoordInputs(ship.name, retried);
       }
 
-      const tryPlacementResult = await board.placeShip(ship, location);
+      const tryPlacementResult = await board.placeShip(ship, location, board);
 
       if (tryPlacementResult) {
         resolve();
