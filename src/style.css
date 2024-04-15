@@ -161,13 +161,15 @@ main {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  border: solid 1px black;
-  background-color: lightcyan;
+  background-color: rgb(105, 216, 231);
+  border: solid 8px lightslategray;
+  border-radius: 5px;
 }
 
 .player-board > div,
 .computer-board > div {
   border: solid 1px black;
+  border-radius: 5px;
 }
 
 .player-board > div:hover,
@@ -190,7 +192,7 @@ main {
 }
 
 .afloat {
-  background-color: green;
+  background-color: grey;
 }
 
 .hit {
@@ -198,11 +200,11 @@ main {
 }
 
 .miss {
-  background-color: grey;
+  background-color: white;
 }
 
 .sunk {
-  background-color: lightcoral;
+  background-color: black;
 }
 
 footer {
