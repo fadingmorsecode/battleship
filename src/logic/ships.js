@@ -1,5 +1,4 @@
 import Gameboard from './gameBoard';
-import { userBoardArr } from './loop/storage';
 
 export default class Ship {
   constructor(name) {
