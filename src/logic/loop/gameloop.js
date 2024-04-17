@@ -4,7 +4,7 @@ import placeAllShips from './placeAllShips';
 import { addToBoardArr, addToObjArr } from './storage';
 import loadAttackListener from '../../dom/attacklistener';
 import { changeStatusToTrue } from './gamestatus';
-import getPlayerInputs from './promptships';
+import getPlayerInputs from './dragships';
 import { turnText } from './turns';
 import changeInfoText from './changeinfotext';
 

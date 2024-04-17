@@ -87,9 +87,43 @@ main {
 }
 
 .middle-container {
-  width: 11rem;
+  max-width: auto;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-container p {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.draggable-ship {
+  display: flex;
+}
+
+.draggable-ship div {
+  border: solid 1px black;
+  background-color: grey;
+  border-radius: 5px;
+  width: 43px;
+  height: 43px;
+}
+
+.middle-container button {
+  width: 120px;
+  width: 8rem;
+  height: 2rem;
+}
+
+.draggable-ships-container {
+  min-height: 350px;
+  width: 350px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .dynamic-info-text {
