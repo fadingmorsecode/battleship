@@ -10,6 +10,7 @@ export default function generateDivs(boardName) {
       newDiv.setAttribute('coordinate', `${letters[i]}${j}`);
       newDiv.setAttribute('boardName', boardName);
       if (boardName === 'player') {
+        newDiv.classList.add('drop-zone');
         playerBoard.appendChild(newDiv);
       } else {
         computerBoard.appendChild(newDiv);

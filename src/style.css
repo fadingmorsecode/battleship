@@ -104,6 +104,10 @@ main {
   display: flex;
 }
 
+.column {
+  flex-direction: column;
+}
+
 .draggable-ship div {
   border: solid 1px black;
   background-color: grey;
