@@ -58,6 +58,7 @@ export default class Ship {
     const cells = this.getDomCells();
     cells.forEach((cell) => {
       cell.classList.add('sunk');
+      cell.textContent = '☠︎︎';
     });
   }
 

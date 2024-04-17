@@ -3,78 +3,42 @@
   src: url('./assets/Shipment.ttf');
 }
 
+@font-face {
+  font-family: jersey;
+  src: url('./assets/Jersey10-Regular.ttf');
+}
+
 body {
   display: flex;
   flex-direction: column;
   width: 100vw;
+  height: 100vh;
   margin: 0;
 }
 
 header {
-  background-color: black;
+  background-color: #cdb4db;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 50px;
 }
 
 .header-text {
   font-family: shipment;
-  font-size: 4rem;
-  color: #bb4430;
+  font-size: 3rem;
+  color: black;
   margin: 0;
   padding: 0;
 }
 
-.start-game-btn {
-  border: solid 4px #bb4430;
-  border-radius: 5px;
-  width: 8rem;
-  height: 2rem;
-}
-
-.start-game-btn:hover {
-  cursor: pointer;
-}
-
-.error-text {
-  color: red;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-form input {
-  border-radius: 10px;
-  border: solid 3px darkorchid;
-  text-align: center;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-#ship-input-label {
-  color: white;
-  font-size: 1.3rem;
-}
-
-#iteration-text {
-  color: lawngreen;
-}
-
 main {
   display: flex;
-  flex-direction: column;
-  background-color: #efe6dd;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
 }
 
 .board-containers {
@@ -96,6 +60,11 @@ main {
 .middle-container p {
   font-size: 1.8rem;
   margin: 0;
+  font-family: jersey, Arial, Helvetica, sans-serif;
+}
+
+.middle-container button:hover {
+  cursor: pointer;
 }
 
 .draggable-ship {
@@ -114,12 +83,6 @@ main {
   height: 43px;
 }
 
-.middle-container button {
-  width: 120px;
-  width: 8rem;
-  height: 2rem;
-}
-
 .draggable-ships-container {
   min-height: 350px;
   width: 350px;
@@ -128,68 +91,21 @@ main {
   align-items: center;
 }
 
+.middle-container button {
+  width: 120px;
+  width: 8rem;
+  height: 2rem;
+  background-color: #ffc8dd;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-family: jersey, Arial, Helvetica, sans-serif;
+}
+
 .dynamic-info-text {
   width: 150px;
   text-align: center;
   font-size: 1.4rem;
-}
-
-.player-board-container,
-.computer-board-container {
-  width: 500px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-}
-
-.player-board-top,
-.computer-board-top {
-  display: flex;
-  height: 50px;
-  width: 500px;
-}
-
-.empty-div {
-  height: 50px;
-  width: 50px;
-}
-
-.player-board-number-container,
-.computer-board-number-container {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  width: 450px;
-}
-
-.player-board-bot,
-.computer-board-bot {
-  display: flex;
-  height: 450px;
-  width: 500px;
-}
-
-.player-board-letter-container,
-.computer-board-letter-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 450x;
-  width: 50px;
-}
-
-.player-board-letter-container > div,
-.player-board-number-container > div,
-.computer-board-letter-container > div,
-.computer-board-number-container > div {
-  font-size: 1.2rem;
-  font-weight: bold;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: jersey, Arial, Helvetica, sans-serif;
 }
 
 .player-board,
@@ -199,8 +115,8 @@ main {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  background-color: rgb(105, 216, 231);
-  border: solid 8px lightslategray;
+  background-color: #a2d2ff;
+  border: solid 8px gray;
   border-radius: 5px;
 }
 
@@ -223,8 +139,8 @@ main {
 }
 
 .main-player-texts {
-  font-size: 1.5rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  font-family: jersey, Arial, Helvetica, sans-serif;
   font-weight: bold;
   margin: 0;
 }
@@ -243,14 +159,20 @@ main {
 
 .sunk {
   background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.3rem;
 }
 
 footer {
-  background-color: black;
-  color: white;
-  min-height: 65px;
+  background-color: #cdb4db;
+  color: black;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
+  font-family: jersey, Arial, Helvetica, sans-serif;
 }
