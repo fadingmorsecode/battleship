@@ -1,11 +1,11 @@
 import startGame from './gameloop';
 
 export default function loadStartGameButton() {
-  const header = document.querySelector('header');
+  const middleContainer = document.querySelector('.middle-container');
   const btn = document.createElement('button');
   btn.textContent = 'Start Game';
   btn.classList.add('start-game-btn');
-  header.appendChild(btn);
+  middleContainer.appendChild(btn);
 }
 
 function removeStartGameButton() {

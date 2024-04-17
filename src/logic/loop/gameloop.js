@@ -7,6 +7,7 @@ import { changeStatusToTrue } from './gamestatus';
 import getPlayerInputs from './dragships';
 import { turnText } from './turns';
 import changeInfoText from './changeinfotext';
+import loadDynamicText from '../../dom/loaddynamictext';
 
 export default async function startGame() {
   const playerOneName = 'player';
@@ -24,5 +25,6 @@ export default async function startGame() {
   placeAllShips(computerBoard);
   changeStatusToTrue();
   loadAttackListener();
+  loadDynamicText();
   changeInfoText(turnText());
 }

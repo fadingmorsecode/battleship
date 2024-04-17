@@ -131,6 +131,8 @@ main {
 }
 
 .dynamic-info-text {
+  width: 150px;
+  text-align: center;
   font-size: 1.4rem;
 }
 
@@ -210,7 +212,6 @@ main {
   border-radius: 5px;
 }
 
-.player-board > div:hover,
 .computer-board > div:hover {
   transform: scale(1.2);
   border-color: red;
