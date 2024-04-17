@@ -2,10 +2,10 @@ import Ship from '../ships';
 import renderPlayerShips from '../../dom/renderplayerships';
 import loadRotationListener from './rotation';
 
-const dragableElement = document.querySelector('.draggable-ship');
+const draggableElement = document.querySelector('.draggable-ship');
 
-dragableElement.addEventListener('dragstart', (e) => {
-  e.dataTransfer.setData('text/plain', dragableElement.id);
+draggableElement.addEventListener('dragstart', (e) => {
+  e.dataTransfer.setData('text/plain', draggableElement.id);
   console.log(e);
 });
 
@@ -30,6 +30,33 @@ function getDrop() {
   });
 }
 
+function getFullCoords(location, ship) {
+  const result = [];
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  // get rotation of ship
+  const rotation = draggableElement.classList.contains('column');
+  const x = location.charAt(0);
+  const y = parseInt(location.substring(1), 10);
+  if (rotation !== true) {
+    // if rotation is horizontal
+    const secondY = y + ship.length - 1;
+    if (secondY > 10) {
+      return 'invalid';
+    }
+    result.push(`${location}`, `${x}${secondY}`);
+    return result;
+  }
+  // if rotation is vertical
+  const index = letters.indexOf(x);
+  const newIndex = index + ship.length - 1;
+  if (newIndex > 9) {
+    return 'invalid';
+  }
+  const secondX = letters[newIndex];
+  result.push(`${location}`, `${secondX}${y}`);
+  return result;
+}
+
 function getShip(board, ship) {
   return new Promise(async (resolve) => {
     async function tryPlacement(location) {
@@ -37,15 +64,17 @@ function getShip(board, ship) {
         location = await getDrop();
       }
 
-      // call a func to get second coord;
-      const coords = [location, location + (ship.length - 1)];
+      const coords = getFullCoords(location, ship);
 
-      const tryPlacementResult = await board.placeShip(ship, coords, board);
+      let tryPlacementResult;
+
+      if (coords !== 'invalid') {
+        tryPlacementResult = await board.placeShip(ship, coords, board);
+      }
 
       if (tryPlacementResult) {
         resolve();
       } else {
-        console.log('nope');
         await tryPlacement(await getDrop()); // retrying
       }
     }
