@@ -1,6 +1,6 @@
 import createPlayer from './createPlayer';
 import createBoard from './createBoard';
-import placeAllShips from './placeAllShips';
+import randomlyPlaceCompShips from './placeAllShips';
 import { addToBoardArr, addToObjArr } from './storage';
 import loadAttackListener from '../../dom/attacklistener';
 import { changeStatusToTrue } from './gamestatus';
@@ -22,7 +22,7 @@ export default async function startGame() {
   addToBoardArr(computerBoard);
 
   await getPlayerInputs(playerOneBoard);
-  placeAllShips(computerBoard);
+  randomlyPlaceCompShips(computerBoard);
   changeStatusToTrue();
   loadAttackListener();
   loadDynamicText();

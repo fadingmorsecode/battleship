@@ -1,4 +1,4 @@
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+export const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
 export default class Gameboard {
   constructor(name) {
@@ -30,7 +30,7 @@ export default class Gameboard {
     const endX = end.charAt(0);
     const endY = parseInt(end.substring(1), 10);
     const baseCoordAmount = 2;
-    if (startX === endX && startY !== endY) {
+    if (startX === endX && startY !== endY && endY < 11) {
       // horizontal condition
       const distance = Gameboard.interveningNums(endY, startY);
       const combined = baseCoordAmount + distance;
