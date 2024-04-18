@@ -3,7 +3,7 @@ export default class Player {
     this.name = name;
   }
 
-  attack(location, board) {
+  static attack(location, board) {
     return board.receiveAttack(location);
   }
 
@@ -16,7 +16,7 @@ export default class Player {
     return randomValue;
   }
 
-  computerAttack(board) {
+  static computerAttack(board) {
     const { allGuesses } = board;
     const possibleGuesses = board.boardArr;
     const randomVal = Player.getRandomValueNotInArr(
