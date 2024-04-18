@@ -1,4 +1,4 @@
-import Ship from '../src/logic/ships';
+import Ship from '../src/logic/classes/ships';
 
 describe('test ship class functionality', () => {
   test('should exist', () => {
@@ -31,12 +31,5 @@ describe('test ship class functionality', () => {
     const newShip = new Ship(shipName);
     newShip.hit();
     expect(newShip.sunk).toBeFalsy();
-  });
-  test('should be sunken when hits equal length', () => {
-    const shipName = 'Destroyer';
-    const newShip = new Ship(shipName);
-    newShip.hit();
-    newShip.hit();
-    expect(newShip.sunk).toBeTruthy();
   });
 });

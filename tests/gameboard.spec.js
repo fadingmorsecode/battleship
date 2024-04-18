@@ -1,5 +1,5 @@
-import Gameboard from '../src/logic/gameBoard';
-import Ship from '../src/logic/ships';
+import Gameboard from '../src/logic/classes/gameBoard';
+import Ship from '../src/logic/classes/ships';
 
 describe('test gameboard class', () => {
   test('module should exist', () => {
@@ -133,6 +133,15 @@ describe('test gameboard class', () => {
     const shipName = 'Destroyer';
     const newShip = new Ship(shipName);
     const placement = ['H5', 'G6'];
+    newBoard.placeShip(newShip, placement);
+    expect(newShip.coordinates).toHaveLength(0);
+  });
+  test('should prevent out of bounds', () => {
+    const boardName = 'player';
+    const newBoard = new Gameboard(boardName);
+    const shipName = 'Destroyer';
+    const newShip = new Ship(shipName);
+    const placement = ['E11', 'F11'];
     newBoard.placeShip(newShip, placement);
     expect(newShip.coordinates).toHaveLength(0);
   });

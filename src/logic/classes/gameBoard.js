@@ -47,7 +47,7 @@ export default class Gameboard {
         allCells.push(end);
         return allCells;
       }
-    } else if (startX !== endX && startY === endY) {
+    } else if (startX !== endX && startY === endY && startY < 11 && endY < 11) {
       // vertical condition
       const startIndex = letters.indexOf(startX);
       const endIndex = letters.indexOf(endX);
