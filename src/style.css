@@ -124,8 +124,6 @@ main {
 .computer-board > div {
   border: solid 1px black;
   border-radius: 5px;
-  width: 45px;
-  height: 45px;
 }
 
 .computer-board > div:hover {
@@ -165,7 +163,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.3rem;
+  font-size: 1.5rem;
 }
 
 footer {
