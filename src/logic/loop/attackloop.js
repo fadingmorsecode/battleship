@@ -3,7 +3,7 @@ import { toggleTurn, turnText } from './turns';
 import endGame from './endgame';
 import checkSunk from './checkSunk';
 import waitOneSecond from './sleep';
-import changeInfoText from './changeinfotext';
+import changeInfoText from '../../dom/changeinfotext';
 
 function toggleMiss(cell) {
   cell.classList.add('miss');

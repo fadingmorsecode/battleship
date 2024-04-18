@@ -1,4 +1,4 @@
-import changeInfoText from './changeinfotext';
+import changeInfoText from '../../dom/changeinfotext';
 import { changeStatusToFalse } from './gamestatus';
 
 export default function endGame(user) {

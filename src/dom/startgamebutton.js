@@ -1,4 +1,4 @@
-import startGame from './gameloop';
+import startGame from '../logic/loop/startgame';
 
 export default function loadStartGameButton() {
   const middleContainer = document.querySelector('.middle-container');

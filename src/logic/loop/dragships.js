@@ -1,6 +1,6 @@
-import Ship from '../ships';
+import Ship from '../classes/ships';
 import renderPlayerShips from '../../dom/renderplayerships';
-import loadRotationListener from './rotation';
+import loadRotationListener from '../../dom/rotation';
 import { createDragUI, removeDragUI } from '../../dom/draggableships';
 
 function getDrop() {

@@ -1,5 +1,5 @@
-import Ship from '../ships';
-import { letters } from '../gameBoard';
+import Ship from '../classes/ships';
+import { letters } from '../classes/gameBoard';
 
 const lettersArr = Array.from(letters);
 

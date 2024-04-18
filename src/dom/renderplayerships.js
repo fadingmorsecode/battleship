@@ -1,4 +1,4 @@
-import Gameboard from '../logic/gameBoard';
+import Gameboard from '../logic/classes/gameBoard';
 import getDomCell from './getdomcell';
 
 function afloat(cell) {
