@@ -57,8 +57,10 @@ export default class Ship {
   toggleSunkClass() {
     const cells = this.getDomCells();
     cells.forEach((cell) => {
-      cell.classList.add('sunk');
-      cell.textContent = '☠︎︎';
+      const cellCopy = cell;
+      cellCopy.classList.add('sunk');
+      // eslint-disable-next-line no-param-reassign
+      cellCopy.textContent = '☠︎︎';
     });
   }
 

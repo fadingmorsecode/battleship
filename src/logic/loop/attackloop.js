@@ -1,9 +1,10 @@
-import { userBoardArr, userObjArr } from './storage';
+import { userBoardArr } from './storage';
 import { toggleTurn, turnText } from './turns';
 import endGame from './endgame';
 import checkSunk from './checkSunk';
 import waitOneSecond from './sleep';
 import changeInfoText from '../../dom/changeinfotext';
+import Player from '../classes/player';
 
 function toggleMiss(cell) {
   cell.classList.add('miss');
@@ -28,7 +29,7 @@ function getAttackedDiv(coord) {
 }
 
 function triggerCompAttack() {
-  const compAttack = userObjArr[1].computerAttack(userBoardArr[0]);
+  const compAttack = Player.computerAttack(userBoardArr[0]);
   const attackedDiv = getAttackedDiv(compAttack.coordinate);
   if (compAttack.successful === true) {
     toggleHit(attackedDiv);
@@ -40,16 +41,14 @@ function triggerCompAttack() {
     endGame('computer');
     return 'allSunk';
   }
+  return 'notAllSunk';
 }
 
 export default async function triggerPlayerAttack(cell, user) {
   if (user === 'player') {
     const cellCoordinate = cell.getAttribute('coordinate');
     if (!userBoardArr[1].allGuesses.includes(cellCoordinate)) {
-      const playerAttack = userObjArr[0].attack(
-        cellCoordinate,
-        userBoardArr[1],
-      );
+      const playerAttack = Player.attack(cellCoordinate, userBoardArr[1]);
       if (playerAttack === true) {
         toggleHit(cell);
       } else {

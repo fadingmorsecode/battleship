@@ -1,4 +1,4 @@
-import css from './style.css';
+import './style.css';
 import generateDivs from './dom/divgeneration';
 import loadStartGameButton from './dom/startgamebutton';
 
